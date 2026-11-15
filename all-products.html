@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,8 +8,8 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/Portfolio/E-Commerce/wegrow/css/styles.css">
-    <link rel="icon" type="image/png" href="/Portfolio/E-Commerce/wegrow/assets/favicon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
 
     <style>
         .breadcrumbs {
@@ -127,8 +127,8 @@
     <header class="header-wrapper">
         <div class="container">
             <div class="header-main">
-                <a href="/Home" class="logo">
-                    <img src="/Portfolio/E-Commerce/wegrow/assets/logo.png" alt="WeGrow Logo">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="WeGrow Logo">
                 </a>
                 <div class="search-container">
                     <input type="text" class="search-bar" placeholder="What are you looking for?">
@@ -149,16 +149,16 @@
             </div>
             <nav class="main-nav">
                 <div class="nav-item">
-                    <a href="/Home" class="nav-link">Home</a>
+                    <a href="index.html" class="nav-link">Home</a>
                 </div>
                 <div class="nav-item">
-                    <a href="/Portfolio/E-Commerce/wegrow/all-products.html" class="nav-link">Shop All</a>
+                    <a href="all-products.html" class="nav-link">Shop All</a>
                 </div>
                 <div class="nav-item">
-                    <a href="/Portfolio/E-Commerce/wegrow/index.html#shop-by-concern" class="nav-link">Concern</a>
+                    <a href="index.html#shop-by-concern" class="nav-link">Concern</a>
                 </div>
                 <div class="nav-item">
-                    <a href="/About" class="nav-link">About Us</a>
+                    <a href="about.html" class="nav-link">About Us</a>
                 </div>
             </nav>
         </div>
@@ -168,7 +168,7 @@
         <div class="container">
             <!-- Breadcrumbs -->
             <div class="breadcrumbs">
-                <a href="/Home">Home</a> <span>|</span> <a href="#">Collection</a> <span>|</span> <span
+                <a href="index.html">Home</a> <span>|</span> <a href="#">Collection</a> <span>|</span> <span
                     class="active">All Products</span>
             </div>
 
@@ -247,7 +247,7 @@
 
             <div class="app-promo-banner" style="background-color: #EEFEF4;">
                 <div class="app-img-wrap">
-                    <img src="/Portfolio/E-Commerce/wegrow/assets/phone.png" alt="WeGrow App">
+                    <img src="assets/phone.png" alt="WeGrow App">
                 </div>
                 <div class="app-promo-content">
                     <h2>Get <span>₹100 OFF</span> your First Order</h2>
@@ -265,7 +265,7 @@
                 <div class="footer-grid">
                     <div class="footer-col">
                         <a href="#" class="footer-logo">
-                            <img src="/Portfolio/E-Commerce/wegrow/assets/favicon.png" alt="WeGrow Logo">
+                            <img src="assets/favicon.png" alt="WeGrow Logo">
                         </a>
                         <ul class="contact-links">
                             <li><i class='bx bx-envelope'></i> support@wegrow.com</li>
@@ -293,7 +293,7 @@
                     <div class="footer-col">
                         <h4>Quick Link</h4>
                         <ul class="footer-links">
-                            <li><a href="/About">About Us</a></li>
+                            <li><a href="about.html">About Us</a></li>
                             <li><a href="#">Shop All Products</a></li>
                             <li><a href="#">Store Location</a></li>
                             <li><a href="#">Terms & Conditions</a></li>
@@ -313,7 +313,7 @@
                 </div>
 
                 <div class="footer-bottom">
-                    <a href="#" style="display:block; margin-bottom:15px;"><img src="/Portfolio/E-Commerce/wegrow/assets/favicon.png" alt="WeGrow"
+                    <a href="#" style="display:block; margin-bottom:15px;"><img src="assets/favicon.png" alt="WeGrow"
                             style="height:40px;"></a>
                     <p>© 2026 WeGrow. Built by Advanced Agentic Coding.</p>
                 </div>
@@ -411,7 +411,7 @@
             </div>
         </div>
     </div>
-    <script src="/Portfolio/E-Commerce/wegrow/js/main.js"></script>
+    <script src="js/main.js"></script>
     <script>
         // Simple script to populate the grid with mock products
         const products = [
@@ -429,11 +429,11 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
-                    <div class="product-img-wrapper" onclick="location.href="/Portfolio/E-Commerce/wegrow/product-detail.html"" style="cursor:pointer;">
-                        <img src="/Portfolio/E-Commerce/wegrow/${p.img}" alt="${p.name}">
+                    <div class="product-img-wrapper" onclick="location.href='product-detail.html'" style="cursor:pointer;">
+                        <img src="${p.img}" alt="${p.name}">
                     </div>
                     <div class="product-info">
-                        <h3 class="product-title" onclick="location.href="/Portfolio/E-Commerce/wegrow/product-detail.html"" style="cursor:pointer;">${p.name}</h3>
+                        <h3 class="product-title" onclick="location.href='product-detail.html'" style="cursor:pointer;">${p.name}</h3>
                         <div class="product-rating" style="font-size: 13px; color: #FFB800; margin-bottom: 10px;">
                             <i class='bx bxs-star'></i> ${p.rating} <span style="color: #666;">| ${p.reviews} Reviews</span>
                         </div>
