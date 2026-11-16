@@ -546,3 +546,137 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+// ==========================================
+// WE-GROW DIALOG MODAL & TOAST SYSTEM
+// ==========================================
+let selectedPaymentMethod = 'UPI (Paytm, GPay, PhonePe)';
+
+function selectPaymentRow(el, method) {
+    document.querySelectorAll('.payment-row').forEach(r => r.classList.remove('selected'));
+    if (el) el.classList.add('selected');
+    selectedPaymentMethod = method;
+    showWeGrowToast(`Payment method selected: ${method}`);
+}
+
+function showWeGrowModal(opts) {
+    const overlay = document.getElementById('wegrow-modal-overlay');
+    if (!overlay) return;
+    const badge = document.getElementById('wegrow-modal-badge');
+    const title = document.getElementById('wegrow-modal-title');
+    const desc = document.getElementById('wegrow-modal-desc');
+    const details = document.getElementById('wegrow-modal-details');
+    const icon = document.getElementById('wegrow-modal-icon');
+
+    if (badge) badge.textContent = opts.badge || 'ORDER ACCEPTED & CONFIRMED';
+    if (title) title.textContent = opts.title || 'Order Placed Successfully!';
+    if (desc) desc.textContent = opts.message || 'Your order has been accepted for fulfillment.';
+    if (icon) icon.innerHTML = opts.icon || '&#10003;';
+
+    if (details && opts.details) {
+        details.innerHTML = opts.details.map(d => `
+            <div class="wegrow-detail-row">
+                <span class="wegrow-detail-label">${d.label}</span>
+                <span class="wegrow-detail-val ${d.highlight ? 'highlight' : ''}">${d.value}</span>
+            </div>
+        `).join('');
+        details.style.display = 'flex';
+    } else if (details) {
+        details.style.display = 'none';
+    }
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeWeGrowModal() {
+    const overlay = document.getElementById('wegrow-modal-overlay');
+    if (overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+let wegrowToastTimer;
+function showWeGrowToast(msg) {
+    const toast = document.getElementById('wegrow-toast');
+    const msgEl = document.getElementById('wegrow-toast-msg');
+    if (!toast) return;
+    if (msgEl) msgEl.textContent = msg;
+    toast.classList.add('active');
+    clearTimeout(wegrowToastTimer);
+    wegrowToastTimer = setTimeout(() => {
+        toast.classList.remove('active');
+    }, 3200);
+}
+
+function showWeGrowLegal(title) {
+    showWeGrowModal({
+        badge: 'LEGAL & ASSURANCE',
+        title: title,
+        message: 'WeGrow Organic Care products are 100% Ayush certified, dermatologically tested, and packaged using eco-friendly compostable materials.',
+        details: [
+            { label: 'Certification', value: 'GMP & Ayush Ministry Approved' },
+            { label: 'Return Policy', value: '7-Day Easy Returns Guarantee' },
+            { label: 'Customer Care', value: '+91 9019099314 / tintedtimber@gmail.com' }
+        ]
+    });
+}
+
+function completeOrder() {
+    const payBtn = document.getElementById('btnCompletePayment');
+    const totalAmount = document.getElementById('checkoutTotalAmount')?.innerText || '₹590';
+    const count = document.getElementById('checkoutItemCount')?.innerText || '1';
+
+    if (payBtn) {
+        payBtn.disabled = true;
+        payBtn.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Authorizing Payment...";
+    }
+
+    setTimeout(() => {
+        if (payBtn) {
+            payBtn.disabled = false;
+            payBtn.innerHTML = "<i class='bx bx-lock-alt'></i> Pay & Place Order (" + totalAmount + ")";
+        }
+
+        const orderId = 'WG-' + Math.floor(100000 + Math.random() * 900000);
+        closeCheckout();
+
+        showWeGrowModal({
+            badge: 'ORDER ACCEPTED & CONFIRMED',
+            title: 'Order Placed Successfully!',
+            message: 'Thank you for your order! Your Ayurvedic wellness products have been accepted for dispatch from our Bangalore central hub.',
+            details: [
+                { label: 'Order ID', value: orderId, highlight: true },
+                { label: 'Recipient', value: 'Krishawn V Rahul' },
+                { label: 'Delivery Address', value: '3 Daisy Villa Pillana Garden, Bangalore - 560049' },
+                { label: 'Items Ordered', value: count + ' Product(s)' },
+                { label: 'Amount Paid', value: totalAmount, highlight: true },
+                { label: 'Payment Mode', value: selectedPaymentMethod },
+                { label: 'Dispatch Speed', value: 'Within 24 Hours via Bluedart Air' },
+                { label: 'Status', value: 'Payment Accepted & Packing', highlight: true }
+            ]
+        });
+
+        // Clear cart
+        cart = [];
+        try { localStorage.removeItem('wegrow_cart'); } catch(e){}
+        updateCartUI();
+    }, 800);
+}
+
+function buyNow(title, price, img) {
+    addToCart(title, price, img);
+    setTimeout(() => {
+        initiateCheckout();
+    }, 300);
+}
+
+// Auto-check stored authentication state
+try {
+    if (localStorage.getItem('wegrow_auth') === 'true') {
+        isAuthenticated = true;
+        updateAuthUI();
+    }
+} catch(e){}
