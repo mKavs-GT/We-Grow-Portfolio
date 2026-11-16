@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -96,21 +96,47 @@
 
         @media (max-width: 768px) {
             .product-grid-main {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px;
+                margin-bottom: 40px;
+            }
+
+            .all-products-title {
+                font-size: 24px;
+                margin: 16px 0 24px;
             }
 
             .category-quick-row {
-                gap: 10px;
-                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 14px;
+                overflow-x: auto;
+                padding: 10px 4px 24px;
+                margin-bottom: 24px;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                flex-wrap: nowrap;
+            }
+
+            .category-quick-row::-webkit-scrollbar {
+                display: none;
             }
 
             .cat-quick-item {
-                width: 80px;
+                width: 72px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
             }
 
             .cat-quick-img {
-                width: 80px;
-                height: 80px;
+                width: 68px;
+                height: 68px;
+                border-radius: 14px;
+                margin-bottom: 6px;
+            }
+
+            .cat-quick-item span {
+                font-size: 11.5px;
             }
         }
     </style>
@@ -127,22 +153,27 @@
     <header class="header-wrapper">
         <div class="container">
             <div class="header-main">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo.png" alt="WeGrow Logo">
-                </a>
+                <div class="header-left-group">
+                    <button class="mobile-menu-btn" onclick="openMobileNav()" aria-label="Open Navigation Menu">
+                        <i class='bx bx-menu'></i>
+                    </button>
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo.png" alt="WeGrow Logo">
+                    </a>
+                </div>
                 <div class="search-container">
                     <input type="text" class="search-bar" placeholder="What are you looking for?">
                     <i class='bx bx-search search-icon'></i>
                 </div>
                 <div class="header-utils">
-                    <button class="util-btn">
+                    <button class="util-btn" onclick="openLoginModal()">
                         <i class='bx bx-user'></i>
                         <span>Sign in/ Register</span>
                     </button>
-                    <button class="util-btn">
+                    <button class="util-btn" onclick="openCart()">
                         <div class="cart-icon-wrapper">
                             <i class='bx bx-shopping-bag'></i>
-                            <span class="cart-badge">0</span>
+                            <span class="cart-badge" id="cartBadge">0</span>
                         </div>
                     </button>
                 </div>
@@ -163,6 +194,51 @@
             </nav>
         </div>
     </header>
+
+    <!-- MOBILE NAVIGATION DRAWER & OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <img src="assets/logo.png" alt="WeGrow Logo">
+            <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Navigation Menu">
+                <i class='bx bx-x'></i>
+            </button>
+        </div>
+        <div class="mobile-nav-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html" class="mobile-nav-link"><span>Home</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="all-products.html" class="mobile-nav-link active" style="color:var(--primary-color);"><span>Shop All Products</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li>
+                    <a href="javascript:void(0)" class="mobile-nav-link" onclick="toggleMobileSubmenu(this)">
+                        <span>Categories</span> <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <div class="mobile-nav-sublist">
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Face Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Hair Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Body & Bath</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Lip Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Baby Care</a>
+                    </div>
+                </li>
+                <li><a href="index.html#shop-by-concern" class="mobile-nav-link" onclick="closeMobileNav()"><span>Shop by Concern</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="about.html" class="mobile-nav-link"><span>About WeGrow</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="javascript:void(0)" class="mobile-nav-link" onclick="closeMobileNav(); openLoginModal();"><span>My Account / Sign In</span> <i class='bx bx-user'></i></a></li>
+            </ul>
+        </div>
+        <div class="mobile-nav-footer">
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-envelope'></i> <span>support@wegrow.com</span>
+            </div>
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-phone'></i> <span>+91 90000 00000</span>
+            </div>
+            <div class="mobile-nav-socials">
+                <a href="#" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
+                <a href="#" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                <a href="#" aria-label="YouTube"><i class='bx bxl-youtube'></i></a>
+            </div>
+        </div>
+    </div>
 
     <main>
         <div class="container">

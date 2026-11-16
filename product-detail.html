@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -372,6 +372,129 @@
                 grid-template-columns: repeat(3, 1fr);
             }
         }
+
+        @media (max-width: 768px) {
+            .product-detail-page {
+                padding: 20px 0 40px;
+            }
+
+            .p-top-grid {
+                gap: 24px;
+            }
+
+            .p-image-box {
+                padding: 16px;
+            }
+
+            .p-info-box h1 {
+                font-size: 22px;
+                margin: 10px 0 4px;
+                line-height: 1.3;
+            }
+
+            .p-tagline {
+                font-size: 13px;
+                margin-bottom: 14px;
+            }
+
+            .p-current-price {
+                font-size: 22px;
+            }
+
+            .p-actions {
+                gap: 10px;
+                margin-bottom: 24px;
+            }
+
+            .qty-btn {
+                padding: 12px 14px;
+                font-size: 18px;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .btn-add-p-cart {
+                padding: 14px;
+                font-size: 15px;
+                min-height: 48px;
+            }
+
+            .benef-section {
+                padding: 40px 0;
+                margin-top: 36px;
+            }
+
+            .benef-grid {
+                gap: 24px;
+            }
+
+            .how-use-title {
+                margin: 40px 0 20px;
+                font-size: 22px;
+            }
+
+            .use-grid {
+                grid-template-columns: 1fr !important;
+                gap: 20px;
+            }
+
+            .use-card img {
+                height: 220px;
+            }
+
+            .ingredients-title {
+                margin: 50px 0 24px;
+                font-size: 22px;
+            }
+
+            .ingred-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 12px;
+            }
+
+            .ingred-card {
+                padding: 14px;
+            }
+
+            .ingred-card img {
+                height: 80px;
+                margin-bottom: 8px;
+            }
+
+            .reviews-section {
+                padding: 40px 0;
+            }
+
+            .review-header-main {
+                padding: 24px 16px !important;
+            }
+
+            .review-header-main > div {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            .rev-summ-middle {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .btn-write-review {
+                width: 100% !important;
+                padding: 12px 24px !important;
+                min-height: 48px;
+            }
+
+            .review-list {
+                grid-template-columns: 1fr !important;
+                padding: 20px 14px !important;
+                gap: 16px !important;
+            }
+
+            .rev-card-full {
+                padding: 16px !important;
+            }
+        }
     </style>
 </head>
 
@@ -387,7 +510,12 @@
     <header class="header-wrapper">
         <div class="container">
             <div class="header-main">
-                <a href="index.html" class="logo"><img src="assets/logo.png" alt="WeGrow Logo"></a>
+                <div class="header-left-group">
+                    <button class="mobile-menu-btn" onclick="openMobileNav()" aria-label="Open Navigation Menu">
+                        <i class='bx bx-menu'></i>
+                    </button>
+                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="WeGrow Logo"></a>
+                </div>
                 <div class="search-container">
                     <input type="text" class="search-bar" placeholder="What are you looking for?">
                     <i class='bx bx-search search-icon'></i>
@@ -409,6 +537,51 @@
             </nav>
         </div>
     </header>
+
+    <!-- MOBILE NAVIGATION DRAWER & OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <img src="assets/logo.png" alt="WeGrow Logo">
+            <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Navigation Menu">
+                <i class='bx bx-x'></i>
+            </button>
+        </div>
+        <div class="mobile-nav-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html" class="mobile-nav-link"><span>Home</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="all-products.html" class="mobile-nav-link"><span>Shop All Products</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li>
+                    <a href="javascript:void(0)" class="mobile-nav-link" onclick="toggleMobileSubmenu(this)">
+                        <span>Categories</span> <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <div class="mobile-nav-sublist">
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Face Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Hair Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Body & Bath</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Lip Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Baby Care</a>
+                    </div>
+                </li>
+                <li><a href="index.html#shop-by-concern" class="mobile-nav-link" onclick="closeMobileNav()"><span>Shop by Concern</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="about.html" class="mobile-nav-link"><span>About WeGrow</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="javascript:void(0)" class="mobile-nav-link" onclick="closeMobileNav(); openLoginModal();"><span>My Account / Sign In</span> <i class='bx bx-user'></i></a></li>
+            </ul>
+        </div>
+        <div class="mobile-nav-footer">
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-envelope'></i> <span>support@wegrow.com</span>
+            </div>
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-phone'></i> <span>+91 90000 00000</span>
+            </div>
+            <div class="mobile-nav-socials">
+                <a href="#" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
+                <a href="#" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                <a href="#" aria-label="YouTube"><i class='bx bxl-youtube'></i></a>
+            </div>
+        </div>
+    </div>
 
     <main>
         <div class="container product-detail-page">
@@ -735,6 +908,20 @@
             </div>
         </div>
     </footer>
+
+    <!-- MOBILE STICKY BOTTOM ACTION BAR -->
+    <div class="mobile-sticky-bar" id="mobileStickyBar">
+        <div class="sticky-bar-info">
+            <img src="https://cdn.shopify.com/s/files/1/0901/3375/8246/files/ABCMaltFront.png?v=1751574913" alt="ABC Malt">
+            <div class="sticky-bar-text">
+                <div class="sticky-bar-title">ABC Malt Pack of 2</div>
+                <div class="sticky-bar-price">Rs. 699 <span style="font-size:11px; color:#999; text-decoration:line-through;">Rs. 990</span></div>
+            </div>
+        </div>
+        <button class="sticky-bar-btn" onclick="addToCart('ABC Malt Pack of 2', 699, 'https://cdn.shopify.com/s/files/1/0901/3375/8246/files/ABCMaltFront.png?v=1751574913')">
+            <i class='bx bx-shopping-bag'></i> Add to Cart
+        </button>
+    </div>
 
     <!-- MODALS -->
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>

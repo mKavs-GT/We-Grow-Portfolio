@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -77,9 +77,14 @@
     <header class="header-wrapper">
         <div class="container">
             <div class="header-main">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo.png" alt="WeGrow Logo">
-                </a>
+                <div class="header-left-group">
+                    <button class="mobile-menu-btn" onclick="openMobileNav()" aria-label="Open Navigation Menu">
+                        <i class='bx bx-menu'></i>
+                    </button>
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo.png" alt="WeGrow Logo">
+                    </a>
+                </div>
                 <div class="search-container">
                     <input type="text" class="search-bar" placeholder="What are you looking for?">
                     <i class='bx bx-search search-icon'></i>
@@ -275,6 +280,51 @@
     </header>
 
     <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- MOBILE NAVIGATION DRAWER & OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <img src="assets/logo.png" alt="WeGrow Logo">
+            <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Navigation Menu">
+                <i class='bx bx-x'></i>
+            </button>
+        </div>
+        <div class="mobile-nav-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html" class="mobile-nav-link"><span>Home</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="all-products.html" class="mobile-nav-link"><span>Shop All Products</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li>
+                    <a href="javascript:void(0)" class="mobile-nav-link" onclick="toggleMobileSubmenu(this)">
+                        <span>Categories</span> <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <div class="mobile-nav-sublist">
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Face Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Hair Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Body & Bath</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Lip Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Baby Care</a>
+                    </div>
+                </li>
+                <li><a href="index.html#shop-by-concern" class="mobile-nav-link" onclick="closeMobileNav()"><span>Shop by Concern</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="about.html" class="mobile-nav-link"><span>About WeGrow</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="javascript:void(0)" class="mobile-nav-link" onclick="closeMobileNav(); openLoginModal();"><span>My Account / Sign In</span> <i class='bx bx-user'></i></a></li>
+            </ul>
+        </div>
+        <div class="mobile-nav-footer">
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-envelope'></i> <span>support@wegrow.com</span>
+            </div>
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-phone'></i> <span>+91 90000 00000</span>
+            </div>
+            <div class="mobile-nav-socials">
+                <a href="#" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
+                <a href="#" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                <a href="#" aria-label="YouTube"><i class='bx bxl-youtube'></i></a>
+            </div>
+        </div>
+    </div>
 
     <!-- 3. MAIN CONTENT -->
     <main>
@@ -534,11 +584,15 @@
                             <div class="store-loc-text">
                                 <p>7899117794</p>
                             </div>
-                            <div class="view-all-wrapper" style="margin-top: 40px;">
-                                <button class="btn-view-all-dark"
-                                    onclick="window.location.href='all-products.html'">View All Stores <i
-                                        class='bx bx-chevron-right'></i></button>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all-wrapper" style="margin-top: 40px; text-align: center;">
+                <button class="btn-view-all-dark"
+                    onclick="window.location.href='all-products.html'">View All Stores <i
+                        class='bx bx-chevron-right'></i></button>
+            </div>
         </section>
 
         <!-- GLOBAL FOOTER BLOCK -->

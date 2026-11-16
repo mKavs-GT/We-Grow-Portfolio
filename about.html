@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -211,6 +211,99 @@
             background: #004D2C;
             color: white;
         }
+
+        @media (max-width: 768px) {
+            .about-hero-new h1 {
+                font-size: 28px;
+            }
+            .founder-block {
+                padding: 40px 0 60px;
+            }
+            .founder-grid-new {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                text-align: center;
+            }
+            .founder-frame {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .founder-frame img.founder-main {
+                max-width: 100%;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            }
+            .crafted-badge {
+                top: 8px;
+                right: 8px;
+                width: 60px;
+                height: 60px;
+                padding: 6px;
+            }
+            .founder-text-new h2 {
+                font-size: 22px;
+                margin-bottom: 16px;
+            }
+            .founder-text-new p {
+                font-size: 14px;
+                line-height: 1.7;
+                text-align: left;
+            }
+            .story-section-new {
+                padding-bottom: 50px;
+            }
+            .story-grid-new {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .story-content-new p {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+            .stats-row {
+                gap: 20px;
+                justify-content: space-around;
+                margin-top: 24px;
+            }
+            .stat-box h3 {
+                font-size: 28px;
+            }
+            .stat-box p {
+                font-size: 12px;
+            }
+            .store-pill-nav {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding: 10px 4px;
+                gap: 8px;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                margin: 20px 0 30px;
+                scrollbar-width: none;
+            }
+            .store-pill-nav::-webkit-scrollbar {
+                display: none;
+            }
+            .store-pill {
+                flex-shrink: 0;
+                padding: 8px 16px;
+                font-size: 12px;
+                scroll-snap-align: start;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+            }
+            .marketplace-strip {
+                padding: 30px 0;
+                margin: 40px 0;
+            }
+            .market-logos {
+                gap: 20px;
+            }
+            .market-logos img {
+                height: 26px;
+            }
+        }
     </style>
 </head>
 
@@ -225,9 +318,14 @@
     <header class="header-wrapper">
         <div class="container">
             <div class="header-main">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo.png" alt="WeGrow Logo">
-                </a>
+                <div class="header-left-group">
+                    <button class="mobile-menu-btn" onclick="openMobileNav()" aria-label="Open Navigation Menu">
+                        <i class='bx bx-menu'></i>
+                    </button>
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo.png" alt="WeGrow Logo">
+                    </a>
+                </div>
                 <div class="search-container">
                     <input type="text" class="search-bar" placeholder="What are you looking for?">
                     <i class='bx bx-search search-icon'></i>
@@ -261,6 +359,51 @@
             </nav>
         </div>
     </header>
+
+    <!-- MOBILE NAVIGATION DRAWER & OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <img src="assets/logo.png" alt="WeGrow Logo">
+            <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close Navigation Menu">
+                <i class='bx bx-x'></i>
+            </button>
+        </div>
+        <div class="mobile-nav-body">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html" class="mobile-nav-link"><span>Home</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="all-products.html" class="mobile-nav-link"><span>Shop All Products</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li>
+                    <a href="javascript:void(0)" class="mobile-nav-link" onclick="toggleMobileSubmenu(this)">
+                        <span>Categories</span> <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <div class="mobile-nav-sublist">
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Face Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Hair Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Body & Bath</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Lip Care</a>
+                        <a href="all-products.html" class="mobile-nav-sublink"><i class='bx bx-check'></i> Baby Care</a>
+                    </div>
+                </li>
+                <li><a href="index.html#shop-by-concern" class="mobile-nav-link" onclick="closeMobileNav()"><span>Shop by Concern</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="about.html" class="mobile-nav-link active" style="color:var(--primary-color);"><span>About WeGrow</span> <i class='bx bx-chevron-right'></i></a></li>
+                <li><a href="javascript:void(0)" class="mobile-nav-link" onclick="closeMobileNav(); openLoginModal();"><span>My Account / Sign In</span> <i class='bx bx-user'></i></a></li>
+            </ul>
+        </div>
+        <div class="mobile-nav-footer">
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-envelope'></i> <span>support@wegrow.com</span>
+            </div>
+            <div class="mobile-nav-contact-item">
+                <i class='bx bx-phone'></i> <span>+91 90000 00000</span>
+            </div>
+            <div class="mobile-nav-socials">
+                <a href="#" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
+                <a href="#" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                <a href="#" aria-label="YouTube"><i class='bx bxl-youtube'></i></a>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Breadcrumbs -->

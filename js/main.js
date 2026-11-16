@@ -1,4 +1,4 @@
-﻿// ==========================================
+// ==========================================
 // CORE DATA & DYNAMIC GENERATION
 // ==========================================
 const productData = [
@@ -477,3 +477,72 @@ function initiateCheckout() {
         openCheckout();
     }
 }
+
+// ==========================================
+// MOBILE NAVIGATION & STICKY ACTIONS
+// ==========================================
+function openMobileNav() {
+    const drawer = document.getElementById('mobileNavDrawer');
+    const overlay = document.getElementById('mobileNavOverlay');
+    if (drawer) drawer.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
+    const drawer = document.getElementById('mobileNavDrawer');
+    const overlay = document.getElementById('mobileNavOverlay');
+    if (drawer) drawer.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function toggleMobileSubmenu(link) {
+    const sublist = link.nextElementSibling;
+    const chevron = link.querySelector('i');
+    if (sublist) {
+        const isHidden = window.getComputedStyle(sublist).display === 'none';
+        sublist.style.display = isHidden ? 'block' : 'none';
+        if (chevron) {
+            chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+    }
+}
+
+// Sticky Mobile Action Bar on Product Detail
+document.addEventListener('DOMContentLoaded', () => {
+    const stickyBar = document.getElementById('mobileStickyBar');
+    const mainAddBtn = document.querySelector('.btn-add-p-cart');
+
+    if (stickyBar && mainAddBtn) {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (window.innerWidth <= 768) {
+                    if (entry.isIntersecting) {
+                        stickyBar.style.display = 'none';
+                    } else {
+                        stickyBar.style.display = 'flex';
+                    }
+                }
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(mainAddBtn);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                stickyBar.style.display = 'none';
+            }
+        });
+    }
+
+    // Search input enter support
+    document.querySelectorAll('.search-bar').forEach(input => {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && input.value.trim() !== '') {
+                window.location.href = 'all-products.html';
+            }
+        });
+    });
+});
+
